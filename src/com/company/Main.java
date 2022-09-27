@@ -20,7 +20,7 @@ class Main {
   // If we can then can stateFrom ever equal a terminal state?
 
   public void render(Agent agent) {
-    finalState = agent.beliefState.nextState;
+    double[][] finalState = agent.beliefState.nextState;
     int rows = finalState.length;
     int cols = finalState[0].length;
     for (int row = rows - 1; row > 0; row--) {

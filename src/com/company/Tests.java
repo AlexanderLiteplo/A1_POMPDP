@@ -14,19 +14,17 @@ public class Tests {
     @Before
     public void setUp() {
         // Add setup code here
-        int[][] beliefState = new int[4][5];
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 4; col++) {
-                beliefState[row][col] = 1;
+        int[][] map = new int[4][5];
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 5; col++) {
+                map[row][col] = 1;
             }
         }
-        beliefState[2][2] = 2;
-        beliefState[3][4] = 3;
-        beliefState[2][4] = 3;
+        map[2][2] = 2;
+        map[3][4] = 3;
+        map[2][4] = 3;
         State startingState = null;
-        Agent agent = new Agent(beliefState, startingState);
-
-
+        agent = new Agent(map, startingState);
     }
 
     

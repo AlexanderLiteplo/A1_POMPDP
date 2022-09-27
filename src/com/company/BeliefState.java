@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class BeliefState {
 
-    public int[][] currentState ;
-    public int[][] nextState;
+    public double[][] currentState;
+    public double[][] nextState;
     public State[] interiorWalls;
     public State[] terminalStates;
 
     public BeliefState(int[][] map, State startingState) {
         int rows = map.length;
         int columns = map[0].length;
-        this.currentState = new int[rows][columns];
-        this.nextState = new int[rows][columns];
+        this.currentState = new double[rows][columns];
+        this.nextState = new double[rows][columns];
         initializeInteriorWallsAndTerminalStates(map);
         initializeStates(map, startingState);
     }
@@ -54,9 +54,9 @@ public class BeliefState {
         int rows = map.length;
         int columns = map[0].length;
         int numOfStates = (rows - 1) * (columns - 1);
-        int numOfNonTerminalStates = numOfStates - this.interiorWalls.length;
+        double numOfNonTerminalStates = numOfStates - this.interiorWalls.length;
         numOfNonTerminalStates = numOfNonTerminalStates - this.terminalStates.length;
-        if (startingState != null) {
+        if (startingState == null) {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {
                     if (map[row][col] == 1) {
@@ -71,6 +71,10 @@ public class BeliefState {
                         this.currentState[row][col] = 0;
                         this.nextState[row][col] = 0;
                     }
+                    if (row == 0 || col == 0) {
+                        this.currentState[row][col] = -1;
+                        this.nextState[row][col] = -1;
+                    }
                 }
             }
         } else {
@@ -84,6 +88,10 @@ public class BeliefState {
                         this.nextState[row][col] = 0;
                     }
                     if (map[row][col] == 2) {
+                        this.currentState[row][col] = -1;
+                        this.nextState[row][col] = -1;
+                    }
+                    if (row == 0 || col == 0) {
                         this.currentState[row][col] = -1;
                         this.nextState[row][col] = -1;
                     }

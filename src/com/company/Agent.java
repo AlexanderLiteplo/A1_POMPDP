@@ -25,16 +25,6 @@ public class Agent {
         this.beliefState = new BeliefState(map, startingState);
     }
 
-    public void beliefState(State startingState) {
-        if(startingState == null) {
-            // set everything to 1/9
-            // terminals + null states == 0
-        } else {
-            //
-        }
-
-    }
-
     public double[][] runPOMPD(BeliefState initialBelief,
                                ArrayList<Action> actionSequence,
                                ArrayList<Observation> observationSequence,

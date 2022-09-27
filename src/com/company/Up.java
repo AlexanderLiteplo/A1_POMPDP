@@ -15,22 +15,24 @@ public class Up extends Action {
             Agent agent) {
         Map<State, Double> map = new HashMap<State, Double>();
 
-        for (State state : statesFrom) {
+        for (State stateFrom : statesFrom) {
             double probability = 0;
-            if (stateTo.equals(up(state, agent))) {
+            State stateUp = stateTo(up(stateFrom, agent), stateFrom);
+            if (stateTo.equals(stateUp)) {
                 probability = probability + P_UP;
             }
-            if (stateTo.equals(left(state, agent))) {
+            State stateLeft = stateTo(left(stateFrom, agent), stateFrom);
+            if (stateTo.equals(stateLeft)) {
                 probability = probability + P_LEFT;
             }
-            if (stateTo.equals(right(state, agent))) {
+            State stateRight = stateTo(right(stateFrom, agent), stateFrom);
+            if (stateTo.equals(stateRight)) {
                 probability = probability + P_RIGHT;
             }
             if (probability != 0) {
-                map.put(state, probability);
+                map.put(stateFrom, probability);
             }
         }
-
         return map;
     }
 
