@@ -23,107 +23,20 @@ public class Tests {
         beliefState[2][2] = 2;
         beliefState[3][4] = 3;
         beliefState[2][4] = 3;
-        State startingState = null
+        State startingState = null;
         Agent agent = new Agent(beliefState, startingState);
 
-    }
-
-    @Test
-    public void Down_ReachableStates_Corner14() {
-        // Enter code here
-// Enter code here
-        Left goLeft = new Left();
-        State stateTo = new State(1,4);
-        ArrayList<State> statesFrom = new ArrayList<State>();
-        statesFrom.add(new State(1,3));
-        statesFrom.add(new State(1,3));
-        Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(1,3), );
-
-
-        Map<State, Double> actual = goLeft.reachableStates(stateTo,
-                statesFrom,
-                agent);
-
-
-        assertTrue(actual.equals(expected));
 
     }
 
-    @Test
-    public void Up_ReachableStates_CornerCase11() {
-        // Enter code here
-        // Enter code here
-        Left goLeft = new Left();
-        State stateTo = new State(1,1);
-        ArrayList<State> statesFrom = new ArrayList<State>();
-        statesFrom.add(new State(1,1));
-        statesFrom.add(new State(1,2));
-        Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(1,1), 0.1);
-        expected.put(new State(1,2), 0.1);
-
-        Map<State, Double> actual = goLeft.reachableStates(stateTo,
-                statesFrom,
-                agent);
-
-
-        assertTrue(actual.equals(expected));
-
-    }
-
-    @Test
-    public void Down_ReachableStates_CornerCase11() {
-        // Enter code here
-// Enter code here
-        Left goLeft = new Left();
-        State stateTo = new State(1,1);
-        ArrayList<State> statesFrom = new ArrayList<State>();
-        statesFrom.add(new State(1,1));
-        statesFrom.add(new State(1,2));
-        statesFrom.add(new State(2,1));
-        Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(1,1), 0.9);
-        expected.put(new State(2,1), 0.8);
-        expected.put(new State(1,2), 0.1);
-
-        Map<State, Double> actual = goLeft.reachableStates(stateTo,
-                statesFrom,
-                agent);
-
-
-        assertTrue(actual.equals(expected));
-
-    }
-
-    @Test
-    public void Right_ReachableStates_CornerCase11() {
-        // Enter code here
-        // Enter code here
-        Left goLeft = new Left();
-        State stateTo = new State(1,1);
-        ArrayList<State> statesFrom = new ArrayList<State>();
-        statesFrom.add(new State(1,1));
-        statesFrom.add(new State(2,1));
-        Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(1,1), 0.1);
-        expected.put(new State(2,1), 0.1);
-
-        Map<State, Double> actual = goLeft.reachableStates(stateTo,
-                statesFrom,
-                agent);
-
-
-        assertTrue(actual.equals(expected));
-
-    }
+    
 
     @Test
     public void Action_generateNeighbourStates_BesideTerminalStateAndTwoOutsideWalls() {
         // Enter code here
         State s = new State(1, 4);
         Left action = new Left();
-        ArrayList<State> neighbourStates = action.generateNeighbourStates(s);
+        ArrayList<State> neighbourStates = action.generateNeighbourStates(s, agent);
         State[] expected = new State[2];
         expected[0] = new State(1, 4);
         expected[1] = new State(1, 3);
@@ -152,7 +65,7 @@ public class Tests {
         // Enter code here
         State s = new State(2, 3);
         Left action = new Left();
-        ArrayList<State> neighbourStates = action.generateNeighbourStates(s);
+        ArrayList<State> neighbourStates = action.generateNeighbourStates(s, agent);
         State[] expected = new State[3];
         expected[0] = new State(3, 3);
         expected[1] = new State(2, 3);
@@ -183,7 +96,7 @@ public class Tests {
         // Enter code here
         State s = new State(3, 3);
         Left action = new Left();
-        ArrayList<State> neighbourStates = action.generateNeighbourStates(s);
+        ArrayList<State> neighbourStates = action.generateNeighbourStates(s, agent);
         State[] expected = new State[3];
         expected[0] = new State(3, 2);
         expected[1] = new State(3, 3);
@@ -213,7 +126,7 @@ public class Tests {
         // Enter code here
         State s = new State(2, 1);
         Left action = new Left();
-        ArrayList<State> neighbourStates = action.generateNeighbourStates(s);
+        ArrayList<State> neighbourStates = action.generateNeighbourStates(s, agent);
         State[] expected = new State[3];
         expected[0] = new State(1, 1);
         expected[1] = new State(2, 1);
@@ -244,7 +157,7 @@ public class Tests {
         // Enter code here
         State s = new State(1, 1);
         Left action = new Left();
-        ArrayList<State> neighbourStates = action.generateNeighbourStates(s);
+        ArrayList<State> neighbourStates = action.generateNeighbourStates(s, agent);
         State[] expected = new State[3];
         expected[0] = new State(1, 1);
         expected[1] = new State(2, 1);
@@ -269,34 +182,13 @@ public class Tests {
         }
     }
 
-    @Test
-    public void Left_ReachableStates_cornerCase11() {
-        // Enter code here
-        Left goLeft = new Left();
-        State stateTo = new State(1,1);
-        ArrayList<State> statesFrom = new ArrayList<State>();
-        statesFrom.add(new State(1,1));
-        statesFrom.add(new State(1,2));
-        statesFrom.add(new State(2,1));
-        Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(1,1), 0.9);
-        expected.put(new State(2,1), 0.1);
-        expected.put(new State(1,2), 0.8);
-
-        Map<State, Double> actual = goLeft.reachableStates(stateTo,
-                statesFrom,
-                agent);
-
-
-        assertTrue(actual.equals(expected));
-
-    }
+   
 
     @Test
     public void BeliefState_isWall_OutsideStateIsWall2() {
         // Enter code here
         State s = new State(3,5);
-        boolean isThereWall = agent.beliefStates.isWall(s);
+        boolean isThereWall = agent.beliefState.isWall(s);
         assertTrue(isThereWall);
 
     }
@@ -305,7 +197,7 @@ public class Tests {
     public void BeliefState_isWall_OutsideStateIsWall1() {
         // Enter code here
         State s = new State(4,4);
-        boolean isThereWall = agent.beliefStates.isWall(s);
+        boolean isThereWall = agent.beliefState.isWall(s);
         assertTrue(isThereWall);
 
     }
@@ -314,7 +206,7 @@ public class Tests {
     public void BeliefState_isWall_TerminalStateIsNotWall() {
         // Enter code hereState
         State s = new State(2,4);
-        boolean isThereWall = agent.beliefStates.isWall(s);
+        boolean isThereWall = agent.beliefState.isWall(s);
         assertFalse(isThereWall);
 
     }
@@ -323,7 +215,7 @@ public class Tests {
     public void BeliefState_isWall_NonTerminalStateIsNotWall() {
         // Enter code here
         State s = new State(1, 1);
-        boolean isThereWall = agent.beliefStates.isWall(s);
+        boolean isThereWall = agent.beliefState.isWall(s);
         assertFalse(isThereWall);
     }
 
@@ -331,7 +223,7 @@ public class Tests {
     public void BeliefState_isWall_stateIsWall() {
         // Enter code here
         State s = new State(2, 2);
-        boolean isThereWall = agent.beliefStates.isWall(s);
+        boolean isThereWall = agent.beliefState.isWall(s);
         assertTrue(isThereWall);
     }
 

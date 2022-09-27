@@ -1,22 +1,21 @@
 package com.company;
 
-
 import java.util.ArrayList;
 
 public class BeliefState {
 
-    public final int[][] currentState;
-    public final int[][] nextState;
-    public final State[] interiorWalls;
+    public int[][] currentState ;
+    public int[][] nextState;
+    public State[] interiorWalls;
+    public State[] terminalStates;
 
     public BeliefState(int[][] map, State startingState) {
-        rows = map.length;
-        columns = map[0].length;
-        int numOfTerminalStates = 0;
+        int rows = map.length;
+        int columns = map[0].length;
         this.currentState = new int[rows][columns];
         this.nextState = new int[rows][columns];
-        initializeInteriorWalls(map, numOfTerminalStates);
-        initializeStates(map, startingState, numOfTerminalStates);
+        initializeInteriorWallsAndTerminalStates(map);
+        initializeStates(map, startingState);
     }
 
     public BeliefState(State s) {
@@ -24,34 +23,40 @@ public class BeliefState {
     }
 
     public boolean isWall(State s) {
+        
         return true;
     }
 
-    public void initializeInteriorWalls(int[][] map, int numOfTerminalStates) {
+    public void initializeInteriorWallsAndTerminalStates(int[][] map) {
         ArrayList<State> walls = new ArrayList<State>();
+        ArrayList<State> terminals = new ArrayList<State>();
         for (int row = 0; row < map.length; row++) {
             for (int col = 0; col < map[0].length; col++) {
                 if (map[row][col] == 2) {
                     walls.add(new State(row, col));
                 }
                 if (map[row][col] == 3) {
-                    numOfTerminalStates++;
+                    terminals.add(new State(row, col));
                 }
             }
         }
-        this.interiorWalls = State[walls.size()];
-        for (int i = 0; i > this.interiorWalls.length; i++) {
+        this.interiorWalls  = new State[walls.size()];
+        this.terminalStates = new State[terminals.size()];
+        for (int i = 0; i < this.interiorWalls.length; i++) {
             this.interiorWalls[i] = walls.get(i);
+        }
+        for (int i = 0; i < this.terminalStates.length; i++) {
+            this.terminalStates[i] = terminals.get(i);
         }
     }
 
-    public void initializeStates(int[][] map, State startingState, int numOfTerminalStates) {
+    public void initializeStates(int[][] map, State startingState) {
         int rows = map.length;
         int columns = map[0].length;
         int numOfStates = (rows - 1) * (columns - 1);
-        int numOfNonTerminalStates = numOfStates - this.interiorWalls;
-        numOfNonTerminalStates = numOfNonTerminalStates - numOfTerminalStates;
-        if (!startingState) {
+        int numOfNonTerminalStates = numOfStates - this.interiorWalls.length;
+        numOfNonTerminalStates = numOfNonTerminalStates - this.terminalStates.length;
+        if (startingState != null) {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {
                     if (map[row][col] == 1) {
@@ -68,7 +73,6 @@ public class BeliefState {
                     }
                 }
             }
-
         } else {
             for (int row = 0; row < rows; row++) {
                 for (int col = 0; col < columns; col++) {

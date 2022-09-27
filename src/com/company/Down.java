@@ -13,6 +13,22 @@ public class Down extends Action {
                                               Agent agent) {
 
         Map<State, Double> map = new HashMap<State, Double>();
+        for (State state : statesFrom) {
+            double probability = 0;
+            if (stateTo.equals(down(state, agent))) {
+                probability = probability + P_DOWN;
+            }
+            if (stateTo.equals(left(state, agent))) {
+                probability = probability + P_LEFT;
+            }
+            if (stateTo.equals(right(state, agent))) {
+                probability = probability + P_RIGHT;
+            }
+            if (probability != 0) {
+                map.put(state, probability);
+            }
+        }
+
         return map;
     }
 

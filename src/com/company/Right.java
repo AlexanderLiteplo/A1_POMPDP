@@ -12,7 +12,24 @@ public class Right extends Action {
                                               ArrayList<State> statesFrom,
                                               Agent agent) {
 
-        return null;
+        Map<State, Double> map = new HashMap<State, Double>();
+        for (State state : statesFrom) {
+            double probability = 0;
+            if (stateTo.equals(right(state, agent))) {
+                probability = probability + P_RIGHT;
+            }
+            if (stateTo.equals(up(state, agent))) {
+                probability = probability + P_UP;
+            }
+            if (stateTo.equals(down(state, agent))) {
+                probability = probability + P_DOWN;
+            }
+            if (probability != 0) {
+                map.put(state, probability);
+            }
+        }
+
+        return map;
     }
 
 }
