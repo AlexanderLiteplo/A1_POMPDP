@@ -1,6 +1,8 @@
 package com.company;
 
-public class State {
+import java.util.Objects;
+
+public class State implements Comparable<State>{
     public int row;
     public int column;
 
@@ -26,8 +28,23 @@ public class State {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
-        // return Objects.hash(this.row, this.column);
+//        return super.hashCode();
+        return Objects.hash(this.row, this.column);
     }
 
+
+    @Override
+    public int compareTo(State o) {
+        if(this.column == o .column && this.row == o.row)
+            return 0;
+        else return 1;
+    }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "row=" + row +
+                ", column=" + column +
+                '}';
+    }
 }

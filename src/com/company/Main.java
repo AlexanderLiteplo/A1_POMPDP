@@ -3,7 +3,8 @@ package com.company;
 import java.io.*;
 
 class Main {
-
+  // action sequence must be entered as left right up down
+  // objects
   public static void main(String[] args) {
 
     State[][] testArray = new State[3][3];
@@ -17,7 +18,7 @@ class Main {
   }
 
   // Once we enter can we leave it?
-  // If we can then can stateFrom ever equal a terminal state?
+  // If yes, can a stateFrom ever equal a terminal state?
 
   public void render(Agent agent) {
     double[][] finalState = agent.beliefState.nextState;

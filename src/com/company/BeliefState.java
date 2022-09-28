@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class BeliefState {
 
+    //todo add an array that tell you the probabilities of making an observation at state
     public double[][] currentState;
     public double[][] nextState;
     public State[] interiorWalls;
@@ -23,8 +24,10 @@ public class BeliefState {
     }
 
     public boolean isWall(State s) {
-        
-        return true;
+        for(State wall : interiorWalls)
+            if(s.equals(wall))
+                return true;
+        return false;
     }
 
     public void initializeInteriorWallsAndTerminalStates(int[][] map) {
@@ -101,4 +104,8 @@ public class BeliefState {
         }
     }
 
+    //todo implement this method
+    public double getObservationProb(Observation obs, State stateTo) {
+        return 0;
+    }
 }

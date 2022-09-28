@@ -7,7 +7,7 @@ public class Action {
 
     // exclude terminal states since once we are in a terminal state we
     // exit from them
-    public ArrayList<State> generateNeighbourStates(State state, Agent agent) {
+    public ArrayList<State> generateNeighbors(State state, Agent agent) {
         ArrayList<State> neighbours = new ArrayList<>();
         //if !null then add
         //if null returned only once then add
@@ -72,6 +72,8 @@ public class Action {
 
     public boolean isLegalState(State s, Agent agent) {
         State[] interiorWalls = agent.beliefState.interiorWalls;
+        State[] terminalStates = agent.beliefState.terminalStates;
+
         int numOfRows = agent.beliefState.currentState.length;
         int numOfColumns = agent.beliefState.currentState[0].length;
         if (s.row <= 0 || s.column <= 0) {
@@ -82,6 +84,11 @@ public class Action {
         }
         for (State interiorWall : interiorWalls) {
             if ((s.row == interiorWall.row) && (s.column == interiorWall.column)) {
+                return false;
+            }
+        }
+        for (State terminal : terminalStates) {
+            if (terminal.equals(s)) {
                 return false;
             }
         }

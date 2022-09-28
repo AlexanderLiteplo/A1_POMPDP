@@ -1,5 +1,6 @@
 package com.company;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +49,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -71,7 +76,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
 
@@ -94,7 +103,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
 
@@ -112,7 +125,11 @@ public class ReachableStatesTests {
         expected.put(new State(3,3), 0.8);
         Map<State, Double> actual = down.reachableStates(stateTo, statesFrom, agent);
         // check to see if all the fields in the actual and expected State are true
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -135,7 +152,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -157,7 +178,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -170,7 +195,7 @@ public class ReachableStatesTests {
         statesFrom.add(new State(2,3));
         statesFrom.add(new State(3,2));
         Map<State, Double> expected = new HashMap<State, Double>();
-        expected.put(new State(3,2), 0.2);
+        expected.put(new State(3,2), 0.1);
 
 
         Map<State, Double> actual = down.reachableStates(stateTo,
@@ -178,7 +203,13 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+
+        for(State state: expected.keySet()) {
+
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -201,7 +232,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
 
@@ -209,7 +244,7 @@ public class ReachableStatesTests {
     @Test
     public void Down_ReachableStates_Corner14() {
         // Enter code here
-// Enter code here
+        // Enter code here
         Down down = new Down();
         State stateTo = new State(1,4);
         ArrayList<State> statesFrom = new ArrayList<State>();
@@ -225,7 +260,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
 
@@ -247,7 +286,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -268,7 +311,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -288,7 +335,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
     }
 
     @Test
@@ -310,7 +361,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
 
     }
 
@@ -334,7 +389,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
 
     }
 
@@ -357,7 +416,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
 
     }
 
@@ -380,7 +443,11 @@ public class ReachableStatesTests {
                 agent);
 
 
-        assertTrue(actual.equals(expected));
+        assertTrue(actual.keySet().equals(expected.keySet()));
+        for(State state: expected.keySet()) {
+            assertTrue(actual.get(state).equals(expected.get(state)));
+        }
+        Assert.assertEquals(expected.size(),actual.size());
 
     }
 }
