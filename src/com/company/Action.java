@@ -72,7 +72,6 @@ public class Action {
 
     public boolean isLegalState(State s, Agent agent) {
         State[] interiorWalls = agent.beliefState.interiorWalls;
-        State[] terminalStates = agent.beliefState.terminalStates;
 
         int numOfRows = agent.beliefState.currentState.length;
         int numOfColumns = agent.beliefState.currentState[0].length;
@@ -84,11 +83,6 @@ public class Action {
         }
         for (State interiorWall : interiorWalls) {
             if ((s.row == interiorWall.row) && (s.column == interiorWall.column)) {
-                return false;
-            }
-        }
-        for (State terminal : terminalStates) {
-            if (terminal.equals(s)) {
                 return false;
             }
         }

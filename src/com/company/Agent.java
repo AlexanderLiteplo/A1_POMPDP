@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 public class Agent {
 
     public BeliefState beliefState;
-    public int[][] map;
+    public StateType[][] map;
 
     //1 == normal
     //2 == wall
@@ -16,7 +16,7 @@ public class Agent {
     //| 3,1 | 3,2 |
     //| 2,1 |
     //| 1,1 | 1,2 |
-    public Agent(int[][] map, State startingState) {
+    public Agent(StateType[][] map, State startingState) {
         this.map = map;
         //interior walls
         //next state
@@ -31,27 +31,50 @@ public class Agent {
      * Grid input must have a border of walls == 2
      * I expanded map input to be larger and contain them in the tests
      * */
-    public double[][] runPOMPD(BeliefState initialBelief,
-                               ArrayList<Action> actionSequence,
-                               ArrayList<Observation> observationSequence,
-                               State startingState) {
+    public void runPOMPD(Action[] actionSequence,
+                         Observation[] observationSequence) {
         //initialize current beliefState(startingState)
-        BeliefState beliefState = initialBelief;
-        for (int i = 0; i < actionSequence.size(); i++) {
-            calculateNextBeliefState(actionSequence.get(i),
-                    observationSequence.get(i));
+        System.out.println("Initial Belief State:");
+        render(beliefState.currentState);
+        for (int i = 0; i < actionSequence.length; i++) {
+            calculateNextBeliefState(actionSequence[i], observationSequence[i]);
+            //display belief that was just calculated
+            System.out.println("Belief State " + (i + 1) + " :");
+            render(beliefState.nextState);
+            beliefState.currentState = beliefState.nextState;
         }
-        //for(int i = 0; i < actionSequene.size(); i++)
-        // calculateNextBeliefState()
+    }
 
-        return null;
 
+    public void render(double[][] currBelief) {
+        int rows = currBelief.length;
+        int cols = currBelief[0].length;
+        double sum = 0;
+        for (int row = rows - 2; row > 0; row--) {
+            printTop(cols - 2);
+            for (int col = 1; col < cols - 1; col++) {
+                System.out.printf("| %.3f ", currBelief[row][col]);
+                sum += currBelief[row][col];
+//                System.out.printf("sum = %f\n", sum);
+            }
+            System.out.print("|" + "\n");
+        }
+        printTop(cols - 1);
+        System.out.println("Sum of the values: " + sum);
+    }
+
+    public void printTop(int entriesInColumns) {
+        for (int col = 0; col < entriesInColumns; col++) {
+            System.out.print("------ ");
+        }
+        System.out.print("\n");
     }
 
 
     public void calculateNextBeliefState(Action action,
                                          Observation obs) {
         //loop through all states b(s) values
+        double normalizationConstant = 0;
         for (int row = 0; row < beliefState.currentState.length; row++) {
             for (int col = 0; col < beliefState.currentState.length; col++) {
                 // for each state
@@ -74,24 +97,31 @@ public class Agent {
                 // multiply that by the probability of observation given state
                 // also multiply by the normalization constant
                 // set nextBelief state value b(s') = the result
-                // todo what is the normalization constant???
-                double obsProb = beliefState.getObservationProb(obs, stateTo);
-                // todo implement this next part
-                beliefState.nextState[row][col] = 0;
-
+                double obsProb = 0;
+                if (obs.type == ObsType.TWO_WALL)
+                    obsProb = obs.p2Wall(stateTo, this);
+                if (obs.type == ObsType.ONE_WALL)
+                    obsProb = obs.p1Wall(stateTo, this);
+                if (obs.type == ObsType.TERMINAL)
+                    obsProb = obs.pEnd(stateTo, this);
+                //todo put break point here for debugging
+                beliefState.nextState[row][col] = sum * obsProb;
+                normalizationConstant += sum * obsProb;
             }
         }
 
-
-        //neighbors = action.generatNeighborStates()
-
-        //reachableStates = action.ReachableStates(s, neighbors)
-
-        //reachableStatesLeft = left.reachableStates()
-
+        // multiply everything by the normalization constant
+        for (int row = 0; row < beliefState.nextState.length; row++)
+            for (int col = 0; col < beliefState.nextState.length; col++)
+                beliefState.nextState[row][col]
+                        = beliefState.nextState[row][col] / normalizationConstant;
+        // its division because it's just b(s') * (1/normalconst)
     }
 
-    public Map<State, Double> generateReachableStates(Action action, State stateTo, ArrayList<State> neighbors) {
+
+    public Map<State, Double> generateReachableStates(Action action,
+                                                      State stateTo,
+                                                      ArrayList<State> neighbors) {
         Map<State, Double> reachableStates = null;
         if (action instanceof Down) {
             reachableStates = ((Down) action).reachableStates(stateTo,

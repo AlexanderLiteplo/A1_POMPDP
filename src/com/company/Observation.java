@@ -2,6 +2,12 @@ package com.company;
 
 public class Observation {
 
+    ObsType type;
+
+    public Observation(ObsType type) {
+        this.type = type;
+    }
+
     // assumes state is a legal state
     public double p1Wall(State state, Agent agent) {
         if (isTerminalState(state, agent)) {

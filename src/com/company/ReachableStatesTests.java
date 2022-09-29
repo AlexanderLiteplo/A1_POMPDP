@@ -17,18 +17,43 @@ public class ReachableStatesTests {
     @Before
     public void setUp() {
         // Add setup code here
-        int[][] map = new int[4][5];
+        StateType[][] map = new StateType[5][6];
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 5; col++) {
-                map[row][col] = 1;
+                map[row][col] = StateType.NORMAL;
             }
         }
-        map[2][2] = 2;
-        map[3][4] = 3;
-        map[2][4] = 3;
+        map[2][2] = StateType.WALL;
+        map[3][4] = StateType.TERMINAL;
+        map[2][4] = StateType.TERMINAL;
+        //adding walls that are in spots like 0,0 and 4,5
+        for (int column = 0; column < map[0].length; column++) {
+            map[0][column] = StateType.WALL;
+            map[4][column] = StateType.WALL;
+        }
+
+        for (int row = 0; row < map.length; row++) {
+            map[row][0] = StateType.WALL;
+            map[row][5] = StateType.WALL;
+        }
+
+
         State startingState = null;
-        agent = new Agent(map, startingState);
+        agent = new Agent(map,
+                startingState);
+
+//        System.out.println("two walls probs:");
+//        render(twoWallObsProb);
+//        System.out.println("oneWallObsProb");
+//        render(oneWallObsProb);
+//        System.out.println("terminals prob");
+//        render(terminalObsProb);
+
+
+//        render(agent);
     }
+
+
 
     @Test
     public void Right_ReachableStates_Case23() {
@@ -39,6 +64,7 @@ public class ReachableStatesTests {
         statesFrom.add(new State(3,3));
         statesFrom.add(new State(2,3));
         statesFrom.add(new State(1,3));
+        statesFrom.add(new State(2,4));
         Map<State, Double> expected = new HashMap<State, Double>();
         expected.put(new State(3,3),  0.1);
         expected.put(new State(1,3), 0.1);
