@@ -20,6 +20,6 @@
 
     (2) `java com.company.RunSimulator up up up 1wall 1wall 1wall`
 
-    (3) `java com.company.RunSimulator right right up 1wall 1wall end \\[3,2\\]`
+    (3) `java com.company.RunSimulator right right up 1wall 1wall end \[3,2\]`
 
-    (4) `java com.company.RunSimulator up right right right 2walls 2walls 1wall 1wall \\[1,1\\]`
+    (4) `java com.company.RunSimulator up right right right 2walls 2walls 1wall 1wall \[1,1\]`
