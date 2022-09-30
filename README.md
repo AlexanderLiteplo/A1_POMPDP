@@ -8,18 +8,18 @@
 
 4. On the command line, cd into "src" directory. You should be in the "Simulator" directory initially (you can check by doing `pwd` on the terminal) hence by executing `cd src` on the terminal you should be able to get there.
 
-5. First, open the terminal and compile the code by executing `javac ./com/company/RunSimulator.java`
+5. First, open the terminal and compile the code by executing `javac ./com/company/RunSimulation.java`
 
-6. Then open the terminal and run the program by executing `java com.company.RunSimulator <action> <action> ... <action> <observation> <observation> ... <observation> [<row>,<column>]`                  
+6. Then open the terminal and run the program by executing `java com.company.RunSimulation <action> <action> ... <action> <observation> <observation> ... <observation> [<row>,<column>]`                  
 
     Note: It is optional to include the state.
 
 7. Examples: 
 
-    (1) `java com.company.RunSimulator up up up 2walls 2walls 2walls`
+    (1) `java com.company.RunSimulation up up up 2walls 2walls 2walls`
 
-    (2) `java com.company.RunSimulator up up up 1wall 1wall 1wall`
+    (2) `java com.company.RunSimulation up up up 1wall 1wall 1wall`
 
-    (3) `java com.company.RunSimulator right right up 1wall 1wall end \[3,2\]`
+    (3) `java com.company.RunSimulation right right up 1wall 1wall end \[3,2\]`
 
-    (4) `java com.company.RunSimulator up right right right 2walls 2walls 1wall 1wall \[1,1\]`
+    (4) `java com.company.RunSimulation up right right right 2walls 2walls 1wall 1wall \[1,1\]`
