@@ -10,7 +10,7 @@
 
 5. First, open the terminal and compile the code by executing `javac ./com/company/RunSimulation.java`
 
-6. Then open the terminal and run the program by executing `java com.company.RunSimulation <action> <action> ... <action> <observation> <observation> ... <observation> [<row>,<column>]`                  
+6. Then open the terminal and run the program by executing `java com.company.RunSimulation <action> <action> ... <action> <observation> <observation> ... <observation> \[<row>,<column>\]`                  
 
     Note: It is optional to include the state.
 
