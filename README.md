@@ -2,7 +2,7 @@
 
 1. Open vscode or IntelliJ and clone the repository.
 
-2. Ensure you have java installed (you can check up opening terminal and executing `java --version`).
+2. Ensure you have java installed (you can check by opening terminal and executing `java --version`).
 
 3. Open Terminal.
 
