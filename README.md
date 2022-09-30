@@ -13,7 +13,7 @@
 6. Then open the terminal and run the program by executing `java com.company.RunSimulator <action> <action> ... <action> <observation> <observation> ... <observation> [<row>,<column>]`                  
 
     Note: It is optional to include the state.
-/Users/deepgill/CPSC 422/Simulator/readmd.md
+
 7. Examples: 
 
     (1) `java com.company.RunSimulator up up up 2walls 2walls 2walls`
