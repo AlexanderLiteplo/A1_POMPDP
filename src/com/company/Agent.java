@@ -2,8 +2,6 @@ package com.company;
 
 import java.util.*;
 
-import static org.junit.Assert.assertTrue;
-
 public class Agent {
 
     public BeliefState beliefState;
