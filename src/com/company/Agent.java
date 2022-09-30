@@ -42,6 +42,8 @@ public class Agent {
             System.out.println("Belief State " + (i + 1) + " :");
             render(beliefState.nextState);
             beliefState.currentState = beliefState.nextState;
+            beliefState.nextState = new double[beliefState.currentState.length]
+                                        [beliefState.currentState[0].length];
         }
     }
 
@@ -53,7 +55,7 @@ public class Agent {
         for (int row = rows - 2; row > 0; row--) {
             printTop(cols - 2);
             for (int col = 1; col < cols - 1; col++) {
-                System.out.printf("| %.3f ", currBelief[row][col]);
+                System.out.printf("| %f ", currBelief[row][col]);
                 sum += currBelief[row][col];
 //                System.out.printf("sum = %f\n", sum);
             }
@@ -75,8 +77,8 @@ public class Agent {
                                          Observation obs) {
         //loop through all states b(s) values
         double normalizationConstant = 0;
-        for (int row = 0; row < beliefState.currentState.length; row++) {
-            for (int col = 0; col < beliefState.currentState.length; col++) {
+        for (int row = 1; row < beliefState.currentState.length - 1; row++) {
+            for (int col = 1; col < beliefState.currentState[0].length - 1; col++) {
                 // for each state
                 State stateTo = new State(row, col);
                 // find its neighbors
@@ -102,11 +104,11 @@ public class Agent {
                     obsProb = obs.p2Wall(stateTo, this);
                 if (obs.type == ObsType.ONE_WALL)
                     obsProb = obs.p1Wall(stateTo, this);
-                if (obs.type == ObsType.TERMINAL)
+                if (obs.type == ObsType.END)
                     obsProb = obs.pEnd(stateTo, this);
                 //todo put break point here for debugging
                 beliefState.nextState[row][col] = sum * obsProb;
-                normalizationConstant += sum * obsProb;
+                normalizationConstant += beliefState.nextState[row][col];
             }
         }
 
@@ -118,7 +120,7 @@ public class Agent {
         // its division because it's just b(s') * (1/normalconst)
     }
 
-
+    // returns map of states with corresponding probabilities
     public Map<State, Double> generateReachableStates(Action action,
                                                       State stateTo,
                                                       ArrayList<State> neighbors) {

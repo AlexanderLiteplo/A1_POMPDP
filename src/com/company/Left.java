@@ -1,4 +1,5 @@
 package com.company;
+
 import java.util.*;
 
 public class Left extends Action {
@@ -11,8 +12,12 @@ public class Left extends Action {
     public Map<State, Double> reachableStates(State stateTo,
                                               ArrayList<State> statesFrom,
                                               Agent agent) {
-                                                  Map<State, Double> map = new HashMap<State, Double>();
+        Map<State, Double> map = new HashMap<State, Double>();
+
         for (State stateFrom : statesFrom) {
+            if (agent.beliefState.isTerminal(stateFrom))
+                continue;
+
             double probability = 0;
             State stateLeft = stateTo(left(stateFrom, agent), stateFrom);
             if (stateTo.equals(stateLeft)) {

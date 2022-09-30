@@ -14,6 +14,9 @@ public class Right extends Action {
 
         Map<State, Double> map = new HashMap<State, Double>();
         for (State stateFrom : statesFrom) {
+            if(agent.beliefState.isTerminal(stateFrom))
+                continue;
+
             double probability = 0;
             State stateRight = stateTo(right(stateFrom, agent), stateFrom);
             if (stateTo.equals(stateRight)) {

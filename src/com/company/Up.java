@@ -16,6 +16,9 @@ public class Up extends Action {
         Map<State, Double> map = new HashMap<State, Double>();
 
         for (State stateFrom : statesFrom) {
+            if(agent.beliefState.isTerminal(stateFrom))
+                continue;
+
             double probability = 0;
             State stateUp = stateTo(up(stateFrom, agent), stateFrom);
             if (stateTo.equals(stateUp)) {

@@ -33,6 +33,13 @@ public class BeliefState {
         return false;
     }
 
+    public boolean isTerminal(State s) {
+        for (State terminal : terminalStates)
+            if (s.equals(terminal))
+                return true;
+        return false;
+    }
+
     public void initializeInteriorWallsAndTerminalStates(StateType[][] map) {
         ArrayList<State> walls = new ArrayList<State>();
         ArrayList<State> terminals = new ArrayList<State>();

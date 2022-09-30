@@ -15,6 +15,9 @@ public class Down extends Action {
         Map<State, Double> map = new HashMap<State, Double>();
 
         for (State stateFrom : statesFrom) {
+            if(agent.beliefState.isTerminal(stateFrom))
+                continue;
+
             double probability = 0;
             State stateDown = stateTo(down(stateFrom, agent), stateFrom);
 

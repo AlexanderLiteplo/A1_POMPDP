@@ -1,41 +1,63 @@
 package com.company;
+import com.company.*;
 
 public class RunSimulation {
     public static void main(String[] args) {
-        StateType[][] map = new StateType[5][6];
-        initializeMap(map);
+        try {
+            StateType[][] map = new StateType[5][6];
+            initializeMap(map);
+            State startingState = null;
+            int numOfActionsAndObservations = args.length / 2;
+            Action[] actions = new Action[numOfActionsAndObservations];
+            Observation[] observations = new Observation[numOfActionsAndObservations];
+            int isInitialStateSpecified = args.length % 2;
+            if (isInitialStateSpecified == 1) {
+                String startState = args[args.length - 1];
+                int row = Character.getNumericValue(startState.toCharArray()[1]);
+                int column = Character.getNumericValue(startState.toCharArray()[3]);
+                startingState = new State(row, column);
+            }
 
-        State startingState = null;
+            for (int i = 0; i < numOfActionsAndObservations; i++) {
+                String action = args[i].toLowerCase();
+                switch (action) {
+                    case "up":
+                        actions[i] = new Up();
+                        break;
+                    case "left":
+                        actions[i] =  new Left();
+                        break;
+                    case "down":
+                        actions[i] = new Down();
+                        break;
+                    case "right":
+                        actions[i] = new Right();
+                        break;
+                }
+            }
 
-        Agent agent1 = new Agent(map, null);
-        Action[] actionSequence1 = {new Up(), new Up(), new Up()};
-        Observation[] observationSequence1 = {new Observation(ObsType.TWO_WALL),
-            new Observation(ObsType.TWO_WALL),
-            new Observation(ObsType.TWO_WALL)};
+            for (int i = 0; i < numOfActionsAndObservations; i++) {
+                String observation = args[i + numOfActionsAndObservations].toLowerCase();
+                switch (observation) {
+                    case "1wall":
+                        observations[i] = new Observation(ObsType.ONE_WALL);
+                        break;
+                    case "2walls":
+                        observations[i] = new Observation(ObsType.TWO_WALL);
+                        break;
+                    case "end":
+                        observations[i] = new Observation(ObsType.END);
+                        break;
+                }
+            }
 
-        Agent agent2 = new Agent(map, null);
-        Action[] actionSequence2 = {new Up(), new Up(), new Up()};
-        Observation[] observationSequence2 = {new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL)};
+            Agent agent = new Agent(map, startingState);
+            agent.runPOMPD(actions, observations);
 
-        Agent agent3 = new Agent(map, new State(3,2));
-        Action[] actionSequence3 = {new Right(), new Right(), new Right()};
-        Observation[] observationSequence3 = {new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL)};
-
-        Agent agent4 = new Agent(map, new State(1,1));
-        Action[] actionSequence4 = {new Up(), new Right(), new Right(), new Right()};
-        Observation[] observationSequence4 = {new Observation(ObsType.TWO_WALL),
-                new Observation(ObsType.TWO_WALL),
-                new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL)};
-
-//        System.out.println("(up, up, up) (2 walls, 2 walls, 2 walls)");
-//        agent1.runPOMPD(actionSequence1, observationSequence1);
-        System.out.println("(up, right, right, right) (2 walls, 2 walls, 1 wall, 1 wall) with S_0 = (1,1)");
-        agent4.runPOMPD(actionSequence4, observationSequence4);
+        } catch (Exception e) {
+            System.out.println("Incorrect input. Please follow ReadMe instruction.");
+            System.out.println("Error: " + e.getMessage());
+        }
 
     }
 
