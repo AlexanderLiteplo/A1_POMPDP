@@ -14,30 +14,30 @@ public class Action {
         // current state as neighbour because there's a wall
         boolean hasWall = false;
         State addMe = up(state, agent);
-        if(addMe != null)
+        if (addMe != null)
             neighbours.add(addMe);
         else
             hasWall = true;
 
         addMe = down(state, agent);
-        if(addMe != null)
+        if (addMe != null)
             neighbours.add(addMe);
         else
             hasWall = true;
 
         addMe = right(state, agent);
-        if(addMe != null)
+        if (addMe != null)
             neighbours.add(addMe);
         else
             hasWall = true;
 
         addMe = left(state, agent);
-        if(addMe != null)
+        if (addMe != null)
             neighbours.add(addMe);
         else
             hasWall = true;
 
-        if(hasWall)
+        if (hasWall)
             neighbours.add(state);
 
         return neighbours;
@@ -69,7 +69,6 @@ public class Action {
     }
 
 
-
     public boolean isLegalState(State s, Agent agent) {
         State[] interiorWalls = agent.beliefState.interiorWalls;
 
@@ -95,8 +94,6 @@ public class Action {
         }
         return state;
     }
-
-
 
 
 }

@@ -23,7 +23,7 @@ public class RunSimulation {
         Action[] actionSequence3 = {new Right(), new Right(), new Right()};
         Observation[] observationSequence3 = {new Observation(ObsType.ONE_WALL),
                 new Observation(ObsType.ONE_WALL),
-                new Observation(ObsType.ONE_WALL)};
+                new Observation(ObsType.END)};
 
         Agent agent4 = new Agent(map, new State(1,1));
         Action[] actionSequence4 = {new Up(), new Right(), new Right(), new Right()};
@@ -32,8 +32,12 @@ public class RunSimulation {
                 new Observation(ObsType.ONE_WALL),
                 new Observation(ObsType.ONE_WALL)};
 
-//        System.out.println("(up, up, up) (2 walls, 2 walls, 2 walls)");
-//        agent1.runPOMPD(actionSequence1, observationSequence1);
+        System.out.println("(up, up, up) (2 walls, 2 walls, 2 walls)");
+        agent1.runPOMPD(actionSequence1, observationSequence1);
+        System.out.println("(up, up, up) (1 wall,1 wall, 1 wall)");
+        agent2.runPOMPD(actionSequence2, observationSequence2);
+        System.out.println("(right, right, up) (1 wall, 1 wall, end) with S0 = (3,2)");
+        agent3.runPOMPD(actionSequence3, observationSequence3);
         System.out.println("(up, right, right, right) (2 walls, 2 walls, 1 wall, 1 wall) with S_0 = (1,1)");
         agent4.runPOMPD(actionSequence4, observationSequence4);
 

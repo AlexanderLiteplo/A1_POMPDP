@@ -274,6 +274,7 @@ public class ReachableStatesTests {
         Down down = new Down();
         State stateTo = new State(1,4);
         ArrayList<State> statesFrom = new ArrayList<State>();
+        statesFrom.add(new State(2,4));
         statesFrom.add(new State(1,3));
         statesFrom.add(new State(1,4));
         Map<State, Double> expected = new HashMap<State, Double>();
@@ -300,6 +301,8 @@ public class ReachableStatesTests {
         Up goUP = new Up();
         State stateTo = new State(1,4);
         ArrayList<State> statesFrom = new ArrayList<State>();
+        statesFrom.add(new State(2,4));
+
         statesFrom.add(new State(1,3));
         statesFrom.add(new State(1,4));
         Map<State, Double> expected = new HashMap<State, Double>();
@@ -325,6 +328,7 @@ public class ReachableStatesTests {
         Right right = new Right();
         State stateTo = new State(1,4);
         ArrayList<State> statesFrom = new ArrayList<State>();
+        statesFrom.add(new State(2,4));
         statesFrom.add(new State(1,3));
         statesFrom.add(new State(1,4));
         Map<State, Double> expected = new HashMap<State, Double>();
@@ -352,6 +356,7 @@ public class ReachableStatesTests {
         ArrayList<State> statesFrom = new ArrayList<State>();
         statesFrom.add(new State(1,3));
         statesFrom.add(new State(1,4));
+        statesFrom.add(new State(2,4));
         Map<State, Double> expected = new HashMap<State, Double>();
         expected.put(new State(1,4), 0.1);
 
